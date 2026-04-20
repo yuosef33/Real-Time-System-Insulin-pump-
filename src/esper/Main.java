@@ -14,10 +14,6 @@ import Model.SelfTestThread;
 import View.BloodSugarView;
 import View.DashboardView;
 import View.DoseDeliveryView;
-import View.HomeUI;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -27,45 +23,59 @@ import org.apache.log4j.Logger;
  */
 public class Main {
      public static void main(String[] args) throws InterruptedException {
-        final InsulinePump insulinePump=new InsulinePump(100);
-        final InsulineReservoirSensor insulineReservoirSensor =new InsulineReservoirSensor(100.0f);
-        final InsulinController insulinController = new InsulinController(insulinePump,insulineReservoirSensor);
-        BloodSugerSensor sensor = new BloodSugerSensor();
-        DashboardView dashboardView= new DashboardView();
-        DoseDeliveryView doseDeliveryView= new DoseDeliveryView();
-        BloodSugarView bloodSugarView = new  BloodSugarView();
-        MessageDisplayManager manager = new MessageDisplayManager(dashboardView);
-        SelfTestThread selfTestThread= new SelfTestThread(insulineReservoirSensor, sensor, insulinePump, manager);
-        insulinController.setListener(dashboardView,bloodSugarView,doseDeliveryView,manager,selfTestThread);
-        ClockThread clock = new ClockThread(dashboardView,insulinController);
-        clock.start();
-        dashboardView.setVisible(true);
+         
+            InsulinePump pump = new InsulinePump(100);
+            InsulineReservoirSensor reservoir = new InsulineReservoirSensor(100.0f);
 
-        
-        // Disable logging
-        Logger.getRootLogger().setLevel(Level.OFF);
 
-        // Register events
-        Config.registerEvents();
+            DashboardView dashboard = new DashboardView();
+            DoseDeliveryView doseView = new DoseDeliveryView();
+            BloodSugarView sugarView = new BloodSugarView();
 
-        Config.createStatement("select level,timestamp from GlucoseReading").setSubscriber(new Object () {
-            public void update(double level ,long timestamp){
+            BloodSugerSensor sensor = new BloodSugerSensor();
+            MessageDisplayManager messageManager = new MessageDisplayManager(dashboard);
 
-                    LocalDateTime time = LocalDateTime.ofInstant(
-                        Instant.ofEpochMilli(timestamp),
-                        ZoneId.systemDefault()
-                        );
-              System.out.println("new level reading:"+level+
-                      " ,Date :"+time.toLocalDate() +
-                      " ,time :"+time.toLocalTime());    
-              
-             insulinController.onGlucose(level);
-            }});
-        
-        
-        sensor.start();
+            SelfTestThread selfTest = new SelfTestThread(
+                    reservoir,
+                    sensor,
+                    pump,
+                    dashboard
+            );
 
-      
-     }
+
+            InsulinController controller =
+                    new InsulinController(pump, reservoir);
+
+            controller.setListener(
+                    dashboard,
+                    sugarView,
+                    doseView,
+                    messageManager,
+                    selfTest
+            );
+
+
+            ClockThread clock = new ClockThread(dashboard, controller);
+            clock.start();
+
+
+            Logger.getRootLogger().setLevel(Level.OFF);
+            Config.registerEvents();
+
+            Config.createStatement("select level,timestamp from GlucoseReading")
+                    .setSubscriber(new Object() {
+                        public void update(double level, long timestamp) {
+
+                            controller.onGlucose(level);
+                        }
+                    });
+            
+            messageManager.start();
+            selfTest.start();
+
+            dashboard.setVisible(true);
+            sensor.start();
+    
+    }
 
 }

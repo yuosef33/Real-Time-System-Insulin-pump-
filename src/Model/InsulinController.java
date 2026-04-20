@@ -42,9 +42,7 @@ public class InsulinController {
     this.dashboardView=dashboardView;
     this.messageDisplayManager=manager;
 
-    messageDisplayManager.start();
     
-    selfTestThread.start();
     dashboardView.getRefillReservoirBtn().addActionListener(e -> replaceReservoir());
     dashboardView.getOpenDoseBtn().addActionListener(e -> clickDoseBtn());
     dashboardView.getOpenBloodSugarBtn().addActionListener(e -> clickBloodSugerViewBtn());

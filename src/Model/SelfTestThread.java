@@ -4,6 +4,8 @@
  */
 package Model;
 
+import View.DashboardView;
+
 /**
  *
  * @author jamal
@@ -13,13 +15,13 @@ public class SelfTestThread extends Thread {
     private InsulineReservoirSensor sensor;
     private BloodSugerSensor bloodSugerSensor;
     private InsulinePump insulinePump;
-    private MessageDisplayManager messageManager;
+    private DashboardView dashboardView;
 
-    public SelfTestThread(InsulineReservoirSensor sensor, BloodSugerSensor bloodSugerSensor, InsulinePump insulinePump, MessageDisplayManager messageManager) {
+    public SelfTestThread(InsulineReservoirSensor sensor, BloodSugerSensor bloodSugerSensor, InsulinePump insulinePump,DashboardView dashboardView) {
         this.sensor = sensor;
         this.bloodSugerSensor = bloodSugerSensor;
         this.insulinePump = insulinePump;
-        this.messageManager = messageManager;
+        this.dashboardView=dashboardView;
     }
     
 
@@ -56,7 +58,7 @@ public class SelfTestThread extends Thread {
         } 
          message.append("Self Test Finished \n");
 
-        messageManager.addMessage(message.toString());
+        dashboardView.addMessage(message.toString());
         
         
     }

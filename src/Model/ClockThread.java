@@ -12,10 +12,15 @@ import View.DashboardView;
  */
 public class ClockThread extends Thread {
 
-    private DashboardView dashboard;
+     private DashboardView dashboard;
+     private InsulinController controller;
 
-    public ClockThread(DashboardView dashboard) {
+    private boolean resetDoneToday = false;
+
+    public ClockThread(DashboardView dashboard,
+                       InsulinController controller) {
         this.dashboard = dashboard;
+        this.controller=controller;
     }
 
     @Override
@@ -25,12 +30,24 @@ public class ClockThread extends Thread {
                 Thread.sleep(1000);
             } catch (Exception e) {}
 
-            String time = java.time.LocalTime.now()
-                    .format(java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss"));
+            java.time.LocalTime now = java.time.LocalTime.now();
+
+            String time = now.format(
+                java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss")
+            );
 
             javax.swing.SwingUtilities.invokeLater(() -> {
                 dashboard.setCurrentTime(time);
             });
+
+            if (now.getHour() == 0 && now.getMinute() == 0) {
+
+                if (!resetDoneToday) {
+                    controller.dailyReset();
+                    resetDoneToday = true;
+                }
+
+            }
         }
     }
 }
