@@ -45,37 +45,64 @@ public class DoseDeliveryView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Dose Delivery Details");
-        setMinimumSize(new java.awt.Dimension(760, 500));
-        setPreferredSize(new java.awt.Dimension(760, 500));
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(565, 340));
+        setSize(new java.awt.Dimension(556, 321));
+        getContentPane().setLayout(null);
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         lblTitle.setText("Dose Delivery Monitoring");
+        getContentPane().add(lblTitle);
+        lblTitle.setBounds(140, 42, 254, 25);
 
         lblComputedDose.setText("Computed Dose");
+        getContentPane().add(lblComputedDose);
+        lblComputedDose.setBounds(6, 126, 116, 16);
 
         computedDoseField.setEditable(false);
         computedDoseField.setText("0.00");
+        getContentPane().add(computedDoseField);
+        computedDoseField.setBounds(140, 123, 75, 22);
 
         lblMaxSingleDose.setText("Max Single Dose");
+        getContentPane().add(lblMaxSingleDose);
+        lblMaxSingleDose.setBounds(312, 166, 120, 16);
 
         maxSingleDoseField.setEditable(false);
         maxSingleDoseField.setText("5.00");
+        getContentPane().add(maxSingleDoseField);
+        maxSingleDoseField.setBounds(446, 163, 89, 22);
 
         lblMaxDailyDose.setText("Max Daily Dose");
+        getContentPane().add(lblMaxDailyDose);
+        lblMaxDailyDose.setBounds(312, 206, 128, 16);
 
         maxDailyDoseField.setEditable(false);
         maxDailyDoseField.setText("25.00");
+        getContentPane().add(maxDailyDoseField);
+        maxDailyDoseField.setBounds(446, 203, 89, 22);
 
         lblCumulativeDailyDose.setText("Cumulative Daily Dose");
+        getContentPane().add(lblCumulativeDailyDose);
+        lblCumulativeDailyDose.setBounds(6, 202, 128, 16);
 
         cumulativeDailyDoseField.setEditable(false);
         cumulativeDailyDoseField.setText("0.00");
+        cumulativeDailyDoseField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cumulativeDailyDoseFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cumulativeDailyDoseField);
+        cumulativeDailyDoseField.setBounds(140, 199, 75, 22);
 
         lblDeliveryStatus.setText("Delivery Status");
+        getContentPane().add(lblDeliveryStatus);
+        lblDeliveryStatus.setBounds(10, 160, 100, 30);
 
         deliveryStatusField.setEditable(false);
         deliveryStatusField.setText("Delivered");
+        getContentPane().add(deliveryStatusField);
+        deliveryStatusField.setBounds(140, 163, 100, 28);
 
         backToDashboardBtn.setText("Back to Dashboard");
         backToDashboardBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -83,68 +110,8 @@ public class DoseDeliveryView extends javax.swing.JFrame {
                 backToDashboardBtnActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblComputedDose, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(maxSingleDoseField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblMaxSingleDose, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(computedDoseField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(118, 118, 118)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblMaxDailyDose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblCumulativeDailyDose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblDeliveryStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cumulativeDailyDoseField, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(maxDailyDoseField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(deliveryStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(lblTitle))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(203, 203, 203)
-                        .addComponent(backToDashboardBtn)))
-                .addContainerGap(102, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(lblTitle)
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblMaxDailyDose)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(maxDailyDoseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblCumulativeDailyDose)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cumulativeDailyDoseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblDeliveryStatus))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblComputedDose)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(computedDoseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblMaxSingleDose)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(maxSingleDoseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(deliveryStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(backToDashboardBtn)
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
+        getContentPane().add(backToDashboardBtn);
+        backToDashboardBtn.setBounds(203, 265, 150, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -152,6 +119,10 @@ public class DoseDeliveryView extends javax.swing.JFrame {
     private void backToDashboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToDashboardBtnActionPerformed
        
     }//GEN-LAST:event_backToDashboardBtnActionPerformed
+
+    private void cumulativeDailyDoseFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cumulativeDailyDoseFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cumulativeDailyDoseFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,7 +160,7 @@ public class DoseDeliveryView extends javax.swing.JFrame {
     }
 
     public void setCumulativeDailyDoseField(Float cumilative) {
-         cumulativeDailyDoseField.setText(cumilative.toString());
+         cumulativeDailyDoseField.setText(String.format("%.2f ml", cumilative));
     }
 
     public JButton getBackToDashboardBtn() {

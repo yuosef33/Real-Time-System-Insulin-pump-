@@ -29,6 +29,14 @@ public class MessageDisplayManager extends Thread {
             messages.remove(0);
         }
     }
+    public synchronized void clearMessages() {
+    messages.clear();
+    index = 0;
+
+    javax.swing.SwingUtilities.invokeLater(() -> {
+        view.getbufferMessages().setText("");
+    });
+    }
 
     @Override
     public void run() {

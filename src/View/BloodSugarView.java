@@ -50,21 +50,34 @@ public class BloodSugarView extends javax.swing.JFrame {
         setTitle("Blood Sugar Details");
         setPreferredSize(new java.awt.Dimension(700, 500));
         setResizable(false);
+        getContentPane().setLayout(null);
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         lblTitle.setText("Blood Sugar Monitoring");
+        getContentPane().add(lblTitle);
+        lblTitle.setBounds(195, 37, 237, 25);
 
         lblCurrentReading.setText("Current Reading");
+        getContentPane().add(lblCurrentReading);
+        lblCurrentReading.setBounds(118, 89, 86, 34);
 
         currentReadingField.setEditable(false);
         currentReadingField.setText("0.00");
+        getContentPane().add(currentReadingField);
+        currentReadingField.setBounds(118, 135, 91, 31);
 
         lblPreviousReading.setText("Previous Reading");
+        getContentPane().add(lblPreviousReading);
+        lblPreviousReading.setBounds(118, 172, 91, 31);
 
         previousReadingField.setEditable(false);
         previousReadingField.setText("0.00");
+        getContentPane().add(previousReadingField);
+        previousReadingField.setBounds(118, 209, 91, 30);
 
         lblTrendStatus.setText("Trend Status");
+        getContentPane().add(lblTrendStatus);
+        lblTrendStatus.setBounds(370, 100, 103, 20);
 
         trendStatusField.setEditable(false);
         trendStatusField.setText("Unknown");
@@ -73,13 +86,22 @@ public class BloodSugarView extends javax.swing.JFrame {
                 trendStatusFieldActionPerformed(evt);
             }
         });
+        getContentPane().add(trendStatusField);
+        trendStatusField.setBounds(373, 132, 88, 31);
 
         lblRateTrend.setText("Rate Trend");
+        getContentPane().add(lblRateTrend);
+        lblRateTrend.setBounds(373, 169, 231, 31);
 
         rateTrendField.setEditable(false);
         rateTrendField.setText("Unknown");
+        getContentPane().add(rateTrendField);
+        rateTrendField.setBounds(373, 206, 231, 33);
 
+        lblReadingHistory.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblReadingHistory.setText("Reading History");
+        getContentPane().add(lblReadingHistory);
+        lblReadingHistory.setBounds(280, 250, 170, 30);
 
         readingHistoryArea.setEditable(false);
         readingHistoryArea.setColumns(20);
@@ -88,79 +110,18 @@ public class BloodSugarView extends javax.swing.JFrame {
         readingHistoryArea.setWrapStyleWord(true);
         scrollReadingHistory.setViewportView(readingHistoryArea);
 
-        backToDashboardBtn.setText("Back to Dashboard");
+        getContentPane().add(scrollReadingHistory);
+        scrollReadingHistory.setBounds(90, 280, 520, 121);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblPreviousReading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblCurrentReading)
-                    .addComponent(previousReadingField)
-                    .addComponent(currentReadingField))
-                .addGap(164, 164, 164)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblRateTrend, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                    .addComponent(rateTrendField)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(trendStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTrendStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(96, 96, 96))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblTitle)
-                .addGap(146, 146, 146))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(217, 217, 217)
-                        .addComponent(backToDashboardBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(scrollReadingHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblReadingHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(223, 223, 223))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(lblTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblCurrentReading, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(currentReadingField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPreviousReading, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(previousReadingField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lblTrendStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(trendStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblRateTrend, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rateTrendField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(7, 7, 7)
-                .addComponent(lblReadingHistory)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollReadingHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(backToDashboardBtn)
-                .addGap(78, 78, 78))
-        );
+        backToDashboardBtn.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
+        backToDashboardBtn.setText("Back to Dashboard");
+        backToDashboardBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToDashboardBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(backToDashboardBtn);
+        backToDashboardBtn.setBounds(210, 420, 282, 39);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -168,6 +129,10 @@ public class BloodSugarView extends javax.swing.JFrame {
     private void trendStatusFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trendStatusFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_trendStatusFieldActionPerformed
+
+    private void backToDashboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToDashboardBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_backToDashboardBtnActionPerformed
 
     /**
      * @param args the command line arguments

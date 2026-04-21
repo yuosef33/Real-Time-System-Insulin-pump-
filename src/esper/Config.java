@@ -8,6 +8,7 @@ import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPServiceProviderManager;
 import com.espertech.esper.client.EPStatement;
 import events.GlucoseReading;
+import events.ReservoirReading;
 
 /**
  *
@@ -19,6 +20,7 @@ public class Config {
 
     public static void registerEvents() {
         engine.getEPAdministrator().getConfiguration().addEventType(GlucoseReading.class);
+        engine.getEPAdministrator().getConfiguration().addEventType(ReservoirReading.class);
         System.out.println("Events Successfully Registered.");
     }
 

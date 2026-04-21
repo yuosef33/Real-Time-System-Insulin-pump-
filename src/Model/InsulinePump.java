@@ -21,9 +21,7 @@ public class InsulinePump {
         this.MaxDailyDose = MaxDailyDose;
         this.cumulativeDose = 0.0;
     }
-    
-    
-    
+
     public boolean pumpinsuline(double dose){
         double newCumulativeDose=cumulativeDose+dose;
         if(newCumulativeDose<MaxDailyDose){

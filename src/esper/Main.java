@@ -69,7 +69,11 @@ public class Main {
                             controller.onGlucose(level);
                         }
                     });
-            
+            Config.createStatement("select capacityLevel from ReservoirReading").setSubscriber(new Object() {
+                        public void update(Double capacityLevel) {
+                            controller.replaceReservoir(capacityLevel);
+                        }
+                    });
             messageManager.start();
             selfTest.start();
 

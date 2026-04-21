@@ -14,11 +14,6 @@ public class InsulineReservoirSensor {
         else
           throw new RuntimeException("reservoir capacity must 100ml");
     }
-    
-    public void replaceReservoir(){
-        setCapacity(100.0f);
-        System.out.println("=============== reset system ===============");
-    } 
 
     public Float getCapacity() {
         return capacity;
@@ -28,10 +23,14 @@ public class InsulineReservoirSensor {
         this.capacity = capacity;
     }
     
-    public void replaceReservoir(InsulinePump pump){
-    capacity = 100.0f;
-    pump.resetDailyDose();
-    System.out.println("=== System Reset ===");
+    public boolean replaceReservoir(InsulinePump pump,Double capacityLevel){
+        if(capacityLevel==100.0){
+            capacity=100.0f;
+            pump.resetDailyDose();
+            System.out.println("=== System Reset ===");
+            return true;
+        }
+        return false;
     }
     
     public boolean ReservoirSensorTest(){

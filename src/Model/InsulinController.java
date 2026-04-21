@@ -7,7 +7,8 @@ package Model;
 import View.BloodSugarView;
 import View.DashboardView;
 import View.DoseDeliveryView;
-import View.HomeUI;
+import esper.Config;
+import events.ReservoirReading;
 import java.awt.Component;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -34,23 +35,27 @@ public class InsulinController {
     public InsulinController(InsulinePump insulinePump, InsulineReservoirSensor insulineReservoirSensor) {
         this.insulinePump = insulinePump;
         this.insulineReservoirSensor = insulineReservoirSensor;
-    }
-    
+    }   
     public void setListener(DashboardView dashboardView,BloodSugarView bloodSugerView,DoseDeliveryView doseDeliveryView,MessageDisplayManager manager,SelfTestThread selfTestThread) {
     this.bloodSugerView=bloodSugerView;
     this.doseDeliveryView=doseDeliveryView;
     this.dashboardView=dashboardView;
     this.messageDisplayManager=manager;
-
     
-    dashboardView.getRefillReservoirBtn().addActionListener(e -> replaceReservoir());
+
+    try{
+    dashboardView.getRefillReservoirBtn().addActionListener(e -> clickRefillButton());
+    } catch (NumberFormatException e) {
+    System.err.println(e.getMessage());
+    dashboardView.setCapacityError("Please Enter Valid Number");
+    }
+    
     dashboardView.getOpenDoseBtn().addActionListener(e -> clickDoseBtn());
     dashboardView.getOpenBloodSugarBtn().addActionListener(e -> clickBloodSugerViewBtn());
     dashboardView.setSystemStatus("Active");
     doseDeliveryView.getBackToDashboardBtn().addActionListener(e -> clickBacktoDashboardBtn(doseDeliveryView));
     bloodSugerView.getBackToDashboardBtn().addActionListener(e -> clickBacktoDashboardBtn(bloodSugerView));
     }
-
     public void onGlucose(Double currentLevel) {
         readingsHistory.add(currentLevel);
 
@@ -127,7 +132,6 @@ public class InsulinController {
                 dashboardView.addMessage(" SAFE BUT ACCELERATING UP GIVE DOSE: " + dose.floatValue());
                 pumpInsuline(dose,insulineReservoirSensor.getCapacity());
                 
-                
             }
             else if (isRising) {
                 System.out.println("SAFE BUT RISING ");
@@ -165,7 +169,6 @@ public class InsulinController {
         System.out.println("==================================================");
         dashboardView.setCycleStatusField("Waiting");
     }
-    
     private void pumpInsuline(Double dose,double reservoirCapacity){
           if(reservoirCapacity>=dose){
                 boolean dosePumbed =insulinePump.pumpinsuline(dose);
@@ -191,20 +194,27 @@ public class InsulinController {
     }
     public void dailyReset(){
         insulinePump.resetDailyDose();
+        messageDisplayManager.clearMessages();
         updateCumulativeView();
     }
-    
-    public void replaceReservoir(){
-        insulineReservoirSensor.replaceReservoir(insulinePump);
+    public void replaceReservoir(Double capacityLevel){
+        boolean isFull =insulineReservoirSensor.replaceReservoir(insulinePump,capacityLevel);
+        if(isFull){
         dashboardView.setReservoir(insulineReservoirSensor.getCapacity().floatValue());
         dashboardView.setCumulativeDose(insulinePump.getCumulativeDose());
         doseDeliveryView.setCumulativeDailyDoseField(insulinePump.getCumulativeDose().floatValue());
+        messageDisplayManager.clearMessages();
+        dashboardView.setCapacityError("");
+        }
+        else{
+            dashboardView.addMessage("Reservoir must be 100.0 ml");
+            dashboardView.setCapacityError("only can accept 100.0 ml reservoir");
+        }
     }
     public void clickDoseBtn(){
         doseDeliveryView.setMaxDailyDoseField(insulinePump.getMaxDailyDose().floatValue());
         doseDeliveryView.setMaxSingleDoseField(calculator.getMaxDose().floatValue());
         doseDeliveryView.setVisible(true);
-        dashboardView.setVisible(false);
     }
     public void clickBacktoDashboardBtn(Component  component){
         dashboardView.setVisible(true);
@@ -212,11 +222,18 @@ public class InsulinController {
     }    
     public void clickBloodSugerViewBtn(){
         bloodSugerView.setVisible(true);
-        dashboardView.setVisible(false);
     }
     public void updateCumulativeView(){
         dashboardView.setCumulativeDose(insulinePump.getCumulativeDose());
         doseDeliveryView.setCumulativeDailyDoseField(insulinePump.getCumulativeDose().floatValue());
+    }
+    public void clickRefillButton(){
+       boolean isValid=dashboardView.getCapacityHolder().getText().matches("[0-9]+");
+       if(isValid)
+       Config.sendEvent(new ReservoirReading(Double.valueOf(dashboardView.getCapacityHolder().getText())));
+       else{
+           dashboardView.setCapacityError("please enter valid number");
+       }
     }
     
 

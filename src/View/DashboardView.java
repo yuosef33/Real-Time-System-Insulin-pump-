@@ -34,7 +34,6 @@ public class DashboardView extends javax.swing.JFrame {
     private void initComponents() {
 
         lblTitle = new javax.swing.JLabel();
-        lblCurrentTime = new javax.swing.JLabel();
         currentTimeField = new javax.swing.JTextField();
         lblSystemStatus = new javax.swing.JLabel();
         systemStatusField = new javax.swing.JTextField();
@@ -49,7 +48,6 @@ public class DashboardView extends javax.swing.JFrame {
         lblSystemMessages = new javax.swing.JLabel();
         scrollSystemMessages = new javax.swing.JScrollPane();
         systemMessageArea = new javax.swing.JTextArea();
-        initializeBtn = new javax.swing.JButton();
         openBloodSugarBtn = new javax.swing.JButton();
         openDoseBtn = new javax.swing.JButton();
         refillReservoirBtn = new javax.swing.JButton();
@@ -57,42 +55,58 @@ public class DashboardView extends javax.swing.JFrame {
         cycleStatusField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         bufferMessages = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        capacityHolder = new javax.swing.JTextField();
+        capacityError = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Insulin Pump Dashboard");
-        setPreferredSize(new java.awt.Dimension(720, 500));
+        setBackground(new java.awt.Color(44, 46, 47));
+        setPreferredSize(new java.awt.Dimension(822, 590));
         setResizable(false);
-        setSize(new java.awt.Dimension(760, 560));
+        setSize(new java.awt.Dimension(822, 590));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         lblTitle.setText("Insulin Pump Dashboard");
-
-        lblCurrentTime.setText("Current Time");
+        getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 18, 250, -1));
 
         currentTimeField.setEditable(false);
+        currentTimeField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         currentTimeField.setText("00:00:00");
+        getContentPane().add(currentTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 104, 45));
 
         lblSystemStatus.setText("System Status");
+        getContentPane().add(lblSystemStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(602, 14, 100, 22));
 
         systemStatusField.setEditable(false);
         systemStatusField.setText("INACTIVE");
+        getContentPane().add(systemStatusField, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 14, 78, -1));
 
         lblCurrentBloodSugar.setText("Current Blood Sugar");
+        getContentPane().add(lblCurrentBloodSugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 121, 20));
 
         currentBloodSugarField.setEditable(false);
         currentBloodSugarField.setText("0.00");
+        getContentPane().add(currentBloodSugarField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 80, -1));
 
         lblLastComputedDose.setText("Last Computed Dose");
+        getContentPane().add(lblLastComputedDose, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 121, 19));
 
         lastComputedDoseField.setEditable(false);
         lastComputedDoseField.setText("0.00");
+        getContentPane().add(lastComputedDoseField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 80, -1));
 
         lblCumulativeDailyDose.setText("Cumulative Daily Dose");
+        getContentPane().add(lblCumulativeDailyDose, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 130, -1));
 
         cumulativeDailyDoseField.setEditable(false);
         cumulativeDailyDoseField.setText("0.00");
+        getContentPane().add(cumulativeDailyDoseField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 80, -1));
 
-        lblReservoirStatus.setText("Reservoir Status");
+        lblReservoirStatus.setText("Reservoir Capacity");
+        getContentPane().add(lblReservoirStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(602, 134, 110, -1));
 
         reservoirStatusField.setEditable(false);
         reservoirStatusField.setText("100.0 ml");
@@ -101,8 +115,10 @@ public class DashboardView extends javax.swing.JFrame {
                 reservoirStatusFieldActionPerformed(evt);
             }
         });
+        getContentPane().add(reservoirStatusField, new org.netbeans.lib.awtextra.AbsoluteConstraints(602, 156, 117, -1));
 
         lblSystemMessages.setText("System Messages");
+        getContentPane().add(lblSystemMessages, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, -1, -1));
 
         systemMessageArea.setEditable(false);
         systemMessageArea.setColumns(20);
@@ -111,16 +127,13 @@ public class DashboardView extends javax.swing.JFrame {
         systemMessageArea.setWrapStyleWord(true);
         scrollSystemMessages.setViewportView(systemMessageArea);
 
-        initializeBtn.setText("Initialize");
-        initializeBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                initializeBtnActionPerformed(evt);
-            }
-        });
+        getContentPane().add(scrollSystemMessages, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 299, 196));
 
         openBloodSugarBtn.setText("Blood Sugar View");
+        getContentPane().add(openBloodSugarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 460, 138, 38));
 
         openDoseBtn.setText("Dose Delivery View");
+        getContentPane().add(openDoseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, 160, 38));
 
         refillReservoirBtn.setText("Refill Reservoir");
         refillReservoirBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -128,136 +141,47 @@ public class DashboardView extends javax.swing.JFrame {
                 refillReservoirBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(refillReservoirBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 460, 183, 36));
 
         jLabel1.setText("Cycle Status");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(602, 70, 87, -1));
 
         cycleStatusField.setEditable(false);
         cycleStatusField.setText("Waiting");
+        getContentPane().add(cycleStatusField, new org.netbeans.lib.awtextra.AbsoluteConstraints(602, 92, 117, -1));
 
         bufferMessages.setColumns(20);
+        bufferMessages.setFont(new java.awt.Font("Traditional Arabic", 1, 24)); // NOI18N
         bufferMessages.setRows(5);
         jScrollPane1.setViewportView(bufferMessages);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lblCurrentBloodSugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblSystemStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(systemStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(currentBloodSugarField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblCurrentTime)
-                                            .addComponent(currentTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCumulativeDailyDose)
-                                    .addComponent(lblLastComputedDose)
-                                    .addComponent(lastComputedDoseField, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(cumulativeDailyDoseField, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblReservoirStatus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(reservoirStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(lblTitle)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(lblSystemMessages)
-                                .addGap(110, 110, 110)))
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cycleStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(111, 111, 111))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(openDoseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(initializeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(42, 42, 42)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(openBloodSugarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(refillReservoirBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(scrollSystemMessages, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(lblTitle)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblLastComputedDose)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lastComputedDoseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cycleStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblCumulativeDailyDose)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cumulativeDailyDoseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblReservoirStatus)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(reservoirStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblCurrentTime)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(currentTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblSystemStatus)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(systemStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblCurrentBloodSugar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(currentBloodSugarField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblSystemMessages)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(initializeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(refillReservoirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(openDoseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(openBloodSugarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(126, 126, 126))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(scrollSystemMessages, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(224, 224, 224))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-        );
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, 320, 80));
+
+        jLabel3.setText("Announcements");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 230, 140, 24));
+
+        capacityHolder.setText("0");
+        capacityHolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                capacityHolderActionPerformed(evt);
+            }
+        });
+        capacityHolder.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                capacityHolderKeyTyped(evt);
+            }
+        });
+        getContentPane().add(capacityHolder, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 500, 80, -1));
+
+        capacityError.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        capacityError.setForeground(new java.awt.Color(255, 0, 51));
+        getContentPane().add(capacityError, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 530, 200, -1));
+
+        jLabel2.setText("Reservoir capacity :");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 500, 120, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void initializeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_initializeBtnActionPerformed
-
-    }//GEN-LAST:event_initializeBtnActionPerformed
 
     private void refillReservoirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refillReservoirBtnActionPerformed
         // TODO add your handling code here:
@@ -267,6 +191,17 @@ public class DashboardView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_reservoirStatusFieldActionPerformed
 
+    private void capacityHolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capacityHolderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_capacityHolderActionPerformed
+
+    private void capacityHolderKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_capacityHolderKeyTyped
+    char c = evt.getKeyChar();
+    if (!(Character.isDigit(c) || c == java.awt.event.KeyEvent.VK_BACK_SPACE || c == java.awt.event.KeyEvent.VK_DELETE)) {
+        evt.consume(); 
+    }
+    }//GEN-LAST:event_capacityHolderKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -274,17 +209,19 @@ public class DashboardView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea bufferMessages;
+    private javax.swing.JLabel capacityError;
+    private javax.swing.JTextField capacityHolder;
     private javax.swing.JTextField cumulativeDailyDoseField;
     private javax.swing.JTextField currentBloodSugarField;
     private javax.swing.JTextField currentTimeField;
     private javax.swing.JTextField cycleStatusField;
-    private javax.swing.JButton initializeBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lastComputedDoseField;
     private javax.swing.JLabel lblCumulativeDailyDose;
     private javax.swing.JLabel lblCurrentBloodSugar;
-    private javax.swing.JLabel lblCurrentTime;
     private javax.swing.JLabel lblLastComputedDose;
     private javax.swing.JLabel lblReservoirStatus;
     private javax.swing.JLabel lblSystemMessages;
@@ -324,13 +261,15 @@ public class DashboardView extends javax.swing.JFrame {
     public void addMessage(String msg) {
         systemMessageArea.append(msg + "\n");
     }
+    public void setCapacityError(String msg) {
+        capacityError.setText(msg);
+    }
     public JTextArea getbufferMessages (){
         return bufferMessages;
     }
-    public JButton getInitializeBtn() {
-        return initializeBtn;
+    public JTextField getCapacityHolder (){
+        return capacityHolder;
     }
-
     public JButton getRefillReservoirBtn() {
         return refillReservoirBtn;
     }
